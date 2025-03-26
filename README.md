@@ -1,16 +1,16 @@
 # 🚀 TestGenie
 
 ## 📌 Table of Contents
-- [Introduction](#introduction)
-- [Demo](#demo)
-- [Inspiration](#inspiration)
-- [What It Does](#what-it-does)
-- [How We Built It](#how-we-built-it)
-- [Challenges We Faced](#challenges-we-faced)
-- [How to Run](#how-to-run)
-- [Tech Stack](#tech-stack)
-- [Future Roadmap](#future-roadmap)
-- [Team](#team)s
+- Introduction
+- Demo
+- Inspiration
+- What It Does
+- How We Built It
+- Challenges We Faced
+- How to Run
+- Tech Stack
+- Future Roadmap
+- Team
 
 ---
 
@@ -18,9 +18,7 @@
 Welcome to **TestGenie**, an innovative AI-powered tool designed to revolutionize functional test case creation for banking systems. Built for the hackathon challenge *"Streamline software testing in regulated industries like banking by leveraging AI to reduce manual effort and improve accuracy."* TestGenie transforms Jira feature details into precise Gherkin test cases with zero-cost AI magic. By automating repetitive tasks, it saves time, enhances test coverage, and ensures compliance with banking standards—making testing faster, smarter, and more reliable.
 
 ## 🎥 Demo
-📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
-![Screenshot 1](link-to-image)
+📹 Video Demo : Video demo file available in artifacts\demo folder. 
 
 ## 💡 Inspiration
 In banking, software testing is a critical yet time-consuming process. Testers often spend hours manually crafting test cases, only for them to become obsolete with new regulations, emerging fraud tactics, or system updates. We’ve witnessed teams racing against deadlines, missing edge cases, delaying releases, and risking compliance failures. This inspired us: what if AI could instantly generate accurate, banking-specific test cases from feature descriptions? TestGenie was born to free testers from grunt work, letting them focus on strategy and innovation—ultimately making banking software safer and more efficient.
@@ -99,8 +97,8 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
 - **Cloud Deployment**: Host on GCP for public access, with scalability in mind.
 
 ## 👥 Team
-- **Amiya Kumar Sahu** - [GitHub](#) | [LinkedIn](#)
-- **Prameela Tulugu** - [GitHub](#) | [LinkedIn](#)
-- **Snehanjali Rowlo** - [GitHub](#) | [LinkedIn](#)
-- **Sudeepa R** - [GitHub](#) | [LinkedIn](#)
+- **Amiya Kumar Sahu**
+- **Prameela Tulugu**
+- **Snehanjali Rowlo**
+- **Sudeepa R**
 - **Tejaswini K** - [GitHub](#) | [LinkedIn](#)
