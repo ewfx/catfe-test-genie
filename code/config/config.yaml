@@ -1,0 +1,23 @@
+google_cloud:
+  project_id: "<your-project-id>"    # Replace with your Google Cloud project ID
+  region: "us-central1"              # Default Vertex AI region
+  model_id: "gemini-2.0-flash"       # Default model
+
+prompts:
+  system_prompt_file: "code/config/system_prompt.txt"
+  example_prompt_file: "code/config/example_prompt.txt"
+
+safety_settings:
+  - category: "HARM_CATEGORY_DANGEROUS_CONTENT"
+    threshold: "BLOCK_LOW_AND_ABOVE"
+  - category: "HARM_CATEGORY_HARASSMENT"
+    threshold: "BLOCK_LOW_AND_ABOVE"
+  - category: "HARM_CATEGORY_HATE_SPEECH"
+    threshold: "BLOCK_LOW_AND_ABOVE"
+  - category: "HARM_CATEGORY_SEXUALLY_EXPLICIT"
+    threshold: "BLOCK_LOW_AND_ABOVE"
+
+generation_config:
+  temperature: 0
+  top_p: 0.95
+  top_k: 20
