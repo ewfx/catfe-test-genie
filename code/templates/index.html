@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TestGenie</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 5px;
+            background-color: #f5f6f5;
+            color: #253858;
+        }
+        .container {
+            width: 90vw;
+            max-width: 90vw;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            border: 1px solid #dfe1e6;
+            height: calc(100vh - 50px);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #0052cc, #2684ff);
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        h1 {
+            color: #0747a6;
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e0e4e9;
+            padding-bottom: 6px;
+            background: linear-gradient(to bottom, #f7f9fc, #ffffff);
+            padding: 8px 10px;
+            border-radius: 4px 4px 0 0;
+        }
+        p.intro {
+            font-size: 14px;
+            color: #5e6c84;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        details {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #253858;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: #0052cc;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #fafbfc;
+        }
+        summary:hover {
+            background: #f0f2f5;
+        }
+        details[open] summary {
+            background: #e6f0fa;
+        }
+        ul.use-cases {
+            list-style-type: none;
+            padding-left: 16px;
+            margin: 8px 0;
+        }
+        ul.use-cases li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        ul.use-cases li strong {
+            color: #253858;
+            font-weight: 600;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        fieldset {
+            border: 1px solid #dfe1e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 0;
+            background-color: #fafbfc;
+            transition: border-color 0.2s;
+        }
+        fieldset:hover {
+            border-color: #b3bac5;
+        }
+        legend {
+            font-size: 13px;
+            font-weight: 600;
+            color: #253858;
+            padding: 0 6px;
+            background: #ffffff;
+            border-radius: 2px;
+        }
+        label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #253858;
+            margin-bottom: 4px;
+            display: block;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input[type="text"]::placeholder, textarea::placeholder {
+            color: #a5adba;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #2684ff;
+            box-shadow: 0 0 0 2px rgba(38, 132, 255, 0.2);
+            outline: none;
+        }
+        input[type="text"] {
+            height: 35px;
+        }
+        textarea {
+            height: 90px;
+            resize: none;
+            overflow-y: auto;
+        }
+        button {
+            background-color: #0052cc;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            width: 120px;
+            margin-top: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        button:hover:not(:disabled) {
+            background-color: #003087;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        button[type="reset"] {
+            background-color: #de350b;
+            margin-left: 10px;
+        }
+        button[type="reset"]:hover:not(:disabled) {
+            background-color: #b02a07;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        button#downloadBtn {
+            background-color: #00875a;
+            display: none;
+        }
+        button#downloadBtn:hover:not(:disabled) {
+            background-color: #006644;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        button:disabled, input:disabled, textarea:disabled {
+            background-color: #dfe1e6;
+            color: #a5adba;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .button-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 10px;
+            gap: 10px;
+            padding-bottom: 10px;
+        }
+        .error-message {
+            color: #df1b41;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            background: #ffebee;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        .error-message.visible {
+            display: block;
+        }
+        .success-message {
+            color: #006644;
+            font-size: 13px;
+            font-weight: 500;
+            margin: 8px 0;
+            background: #e6f4ea;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success-message.visible {
+            display: block;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            border-radius: 4px;
+        }
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #dfe1e6;
+            border-top: 3px solid #0052cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .loading-text {
+            color: #253858;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TestGenie</h1>
+        <p class="intro">Enter Jira feature details below to generate test cases:</p>
+        <details>
+            <summary>Supported Banking Use Cases</summary>
+            <ul class="use-cases">
+                <li><strong>Payment Services Testing:</strong> Involves payment payload changes (e.g., FED, CHIPS, SWIFT ISO), ensuring partner system compatibility, and avoiding regulatory fines due to payment settlement issues.</li>
+                <li><strong>Fraud Detection & Risk Scoring:</strong> Focuses on mimicking evolving fraud patterns, evaluating system responses to fraudulent transactions, and adaptive threat modeling.</li>
+                <li><strong>Loan & Credit Risk Assessment:</strong> Includes AI-driven simulations of customer creditworthiness and scenario testing for loan approval/rejection under different risk conditions.</li>
+                <li><strong>Customer Service Chatbots & NLP-based Testing:</strong> Evaluates AI-powered chatbots for handling banking queries and validates contextual accuracy of responses.</li>
+                <li><strong>Regulatory Compliance & Audit Validation:</strong> Ensures real-time reporting and compliance with KYC, AML, and SOX regulations, and generates synthetic audit logs for compliance testing.</li>
+            </ul>
+        </details>
+        <div class="error-message" id="formError"></div>
+        <form method="POST" id="jiraForm" action="/">
+            <fieldset>
+                <legend>Issue Details</legend>
+                <div>
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" placeholder="e.g., AML Transaction Monitoring (max 100 chars)" maxlength="100">
+                </div>
+                <div>
+                    <label for="jira_id">Jira ID</label>
+                    <input type="text" name="jira_id" id="jira_id" placeholder="e.g., JIRA-1234 (max 10 chars)" maxlength="10">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Description</legend>
+                <div>
+                    <textarea name="description" id="description" placeholder="e.g., As a compliance officer, I want the system to monitor customer transactions..."></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Acceptance Criteria</legend>
+                <div>
+                    <textarea name="acceptance_criteria" id="acceptance_criteria" placeholder="e.g., - Transactions over $10,000 should trigger a Suspicious Activity Report (SAR)..."></textarea>
+                </div>
+            </fieldset>
+            <div class="success-message" id="successMessage">
+                Test cases are ready for download. Click the 'Download' button to download the file.
+            </div>
+            <div class="button-container">
+                <button type="submit">Generate</button>
+                <button type="reset">Clear</button>
+                <button id="downloadBtn" type="button" onclick="downloadFile()">Download</button>
+            </div>
+        </form>
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <span class="loading-text">Test case generation in progress...</span>
+            </div>
+        </div>
+        {% if error %}
+            <p class="error-message visible">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        let fileUrl = null;
+        let hasSubmitted = false; // Flag to track if "Generate" has been clicked
+
+        // Toggle loading state
+        function toggleLoading(isLoading) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const form = document.getElementById('jiraForm');
+            const inputs = form.querySelectorAll('input, textarea, button:not(#downloadBtn)');
+
+            if (isLoading) {
+                loadingOverlay.style.display = 'flex';
+                inputs.forEach(element => element.disabled = true);
+            } else {
+                loadingOverlay.style.display = 'none';
+                inputs.forEach(element => element.disabled = false);
+            }
+        }
+
+        // Function to validate fields and update error message
+        function validateFields(showError = false) {
+            const title = document.getElementById('title').value.trim();
+            const jiraId = document.getElementById('jira_id').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const acceptanceCriteria = document.getElementById('acceptance_criteria').value.trim();
+            const formError = document.getElementById('formError');
+
+            const missingFields = [];
+            if (!title) missingFields.push('Title');
+            if (!jiraId) missingFields.push('Jira ID');
+            if (!description) missingFields.push('Description');
+            if (!acceptanceCriteria) missingFields.push('Acceptance Criteria');
+
+            if (missingFields.length > 0 && (hasSubmitted || showError)) {
+                formError.textContent = `${missingFields.join(', ')} ${missingFields.length === 1 ? 'is' : 'are'} required.`;
+                formError.classList.add('visible');
+                return false;
+            } else {
+                formError.classList.remove('visible');
+                return true;
+            }
+        }
+
+        // Add input event listeners to all form fields for real-time validation
+        const formFields = document.querySelectorAll('#title, #jira_id, #description, #acceptance_criteria');
+        formFields.forEach(field => {
+            field.addEventListener('input', () => validateFields());
+        });
+
+        // Handle form submission
+        document.getElementById('jiraForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            hasSubmitted = true; // Set flag to true on first "Generate" click
+
+            // Validate fields and show error if necessary
+            if (!validateFields(true)) {
+                return; // Stop submission if validation fails
+            }
+
+            const form = document.getElementById('jiraForm');
+            const formData = new FormData(form);
+            console.log('Form Data:', Object.fromEntries(formData)); // Debug: Log FormData
+
+            toggleLoading(true);
+
+            const successMessage = document.getElementById('successMessage');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const formError = document.getElementById('formError');
+
+            try {
+                const response = await fetch('/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                console.log('Server Response:', result); // Debug: Log server response
+
+                toggleLoading(false);
+
+                if (result.success) {
+                    fileUrl = result.file_url;
+                    successMessage.classList.add('visible');
+                    downloadBtn.style.display = 'inline-block';
+                    formError.classList.remove('visible');
+                } else {
+                    formError.textContent = result.error || 'An error occurred while generating test cases';
+                    formError.classList.add('visible');
+                    successMessage.classList.remove('visible');
+                    downloadBtn.style.display = 'none';
+                }
+            } catch (error) {
+                toggleLoading(false);
+                formError.textContent = 'Network error: ' + error.message;
+                formError.classList.add('visible');
+                successMessage.classList.remove('visible');
+                downloadBtn.style.display = 'none';
+            }
+        });
+
+        // Trigger file download
+        function downloadFile() {
+            if (fileUrl) {
+                const link = document.createElement('a');
+                link.href = fileUrl;
+                link.download = fileUrl.split('/').pop();
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Reset form and UI state
+        document.getElementById('jiraForm').addEventListener('reset', () => {
+            const successMessage = document.getElementById('successMessage');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const formError = document.getElementById('formError');
+            successMessage.classList.remove('visible');
+            downloadBtn.style.display = 'none';
+            formError.classList.remove('visible');
+            fileUrl = null;
+            hasSubmitted = false; // Reset the flag on "Clear"
+            validateFields(); // Re-validate after reset (won't show error since hasSubmitted is false)
+        });
+    </script>
+</body>
+</html>
