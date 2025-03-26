@@ -1,0 +1,51 @@
+Feature #1: SWIFT ISO Payment Processing Compliance
+Jira ID: JIRA-1234
+
+Description: As a payment operations manager, I want the system to process international payments according to the latest SWIFT ISO 20022 standards so that we ensure compliance with global payment regulations and avoid settlement delays with partner banks.
+
+Acceptance Criteria:
+
+The system must validate that payment messages include mandatory SWIFT ISO 20022 fields (e.g., debtor IBAN, creditor IBAN, amount, currency).
+Reject payments with missing or invalid mandatory fields.
+Process payments with valid SWIFT ISO 20022 fields within 10 seconds and send them to the partner bank.
+Log all payment transactions, including validation failures, for audit purposes.
+Notify the operations team if a payment is rejected due to non-compliance.
+
+
+
+
+Feature #2: Customer segmentation
+Jira ID: JIRA-1345
+
+Description:  Classify customers based on Predefined criteria
+Acceptance Criteria: The system must classify customers into distinct segments based on predefined criteria such as demographics, transaction behavior, credit score, and financial goals. This segmentation should enable personalized marketing campaigns, tailored product recommendations, and optimized customer service delivery
+
+
+
+Feature #3: AML Compliance for High-Value Transactions
+Jira ID: JIRA-9012
+
+Description: As a compliance officer, I want the system to monitor and flag high-value transactions for Anti-Money Laundering (AML) review so that we adhere to regulatory requirements and prevent illicit financial activities.
+
+Acceptance Criteria:
+
+Flag transactions exceeding $50,000 for AML review.
+Generate a synthetic audit log entry for each flagged transaction, including transaction ID, amount, date, and customer details.
+Notify the compliance team via email with transaction details and a request for review within 5 minutes.
+Allow manual approval or rejection of flagged transactions after review, updating the audit log accordingly.
+Reject transactions if no review decision is made within 24 hours.
+
+
+
+Negative test case:
+------------------
+Feature #4: E-Commerce Product Recommendation Engine
+Jira ID: JIRA-1987
+
+Description: As an e-commerce platform user, I want to receive personalized product recommendations based on my browsing history so that I can discover relevant products to purchase.
+Acceptance Criteria: 
+The system should analyze the user’s browsing history for the last 30 days.
+ The system should recommend products from the same categories as the user’s most viewed items.
+ Recommendations should be displayed on the homepage after the user logs in.
+ If the user has no browsing history, the system should recommend trending products instead.
+ The user should be able to dismiss a recommendation if it’s not relevant.
