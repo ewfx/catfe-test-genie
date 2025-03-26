@@ -101,4 +101,4 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
 - **Prameela Tulugu**
 - **Snehanjali Rowlo**
 - **Sudeepa R**
-- **Tejaswini K** - [GitHub](#) | [LinkedIn](#)
+- **Tejaswini K**
