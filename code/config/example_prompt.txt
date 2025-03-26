@@ -1,0 +1,266 @@
+**Example #1 Input**:
+Description: As a loan officer, I want the system to evaluate customer loan applications based on creditworthiness and risk conditions so that we approve low-risk loans and reject high-risk ones efficiently.
+Acceptance Criteria:
+1. Approve loans for applicants with credit scores >= 750, DTI <= 0.35, and income >= $50,000.
+2. Reject loans for applicants with credit scores < 650 or DTI > 0.43.
+3. Flag loans for manual review if credit score is 650-749 and loan amount > $100,000.
+4. Ensure loan amount is between $1,000 and $1,000,000.
+5. Assign interest rates based on credit score ranges (3% for excellent, 5% for good, etc.).
+
+**Analysis**:
+- The feature focuses on evaluating loan applications based on creditworthiness (credit score, DTI, income) and risk conditions (loan amount), with specific criteria for approval, rejection, manual review, and interest rate assignment.
+- This aligns with the "Loan & Credit Risk Assessment" use case, which involves AI-driven simulation of customer creditworthiness and scenario testing for loan approval/rejection under different risk conditions.
+
+**Generated Test Cases**:
+Scenario: Approve loan when all approval criteria are met
+  Given the applicant has a credit score of 780
+  And the applicant's DTI is 0.3
+  And the applicant's income is $75,000
+  And the loan amount requested is $50,000
+  When the loan application is submitted
+  Then the system should approve the loan
+
+Scenario: Reject loan when credit score is below 650
+  Given the applicant has a credit score of 640
+  And the applicant's DTI is 0.4
+  And the applicant's income is $60,000
+  And the loan amount requested is $25,000
+  When the loan application is submitted
+  Then the system should reject the loan
+
+Scenario: Flag loan for manual review with mid-range credit score and high loan amount
+  Given the applicant has a credit score of 720
+  And the applicant's DTI is 0.4
+  And the applicant's income is $80,000
+  And the loan amount requested is $150,000
+  When the loan application is submitted
+  Then the system should flag the loan for manual review
+
+Scenario: Reject loan when loan amount exceeds maximum limit
+  Given the applicant has a credit score of 800
+  And the applicant's DTI is 0.3
+  And the applicant's income is $100,000
+  And the loan amount requested is $1,500,000
+  When the loan application is submitted
+  Then the system should reject the loan
+
+Scenario: Assign 3% interest rate for excellent credit score
+  Given the applicant has a credit score of 780
+  And the loan application meets all other approval criteria
+  When the loan application is processed
+  Then the system should assign an interest rate of 3%
+
+---
+
+**Example #2 Input**:
+Description: As a bank, we need a fraud detection risk scoring system to identify and assess the risk associated with customer transactions.
+Acceptance Criteria:
+- The system must calculate a risk score based on predefined rules and transaction data.
+- Risk scores should range from 0 (low risk) to 100 (high risk).
+- The system must generate a real-time risk score for each transaction attempted by a customer.
+- The risk score must be calculated using customer behavior data, transaction history, and external data (e.g., IP address, location, etc.).
+- The risk scoring algorithm must be updated periodically based on emerging fraud patterns.
+
+**Analysis**:
+- The feature focuses on calculating real-time risk scores for transactions using predefined rules, customer behavior, and external data, with periodic updates to the algorithm based on fraud patterns.
+- This aligns with the "Fraud Detection & Risk Scoring" use case, which involves mimicking evolving fraud patterns and evaluating system responses to fraudulent transactions.
+
+**Generated Test Cases**:
+Scenario: Calculate low-risk score for a standard transaction
+  Given the system is integrated with transaction data
+  And a transaction has a small amount, usual location, and standard customer behavior
+  When the transaction is processed
+  Then the system should calculate a risk score between 0 and 30
+  And the risk score should be displayed as low risk in real-time
+
+Scenario: Calculate high-risk score for an unusual transaction
+  Given the system is integrated with transaction data
+  And a transaction has a large amount, foreign location, and atypical customer behavior
+  When the transaction is processed
+  Then the system should calculate a risk score between 71 and 100
+  And the risk score should be displayed as high risk in real-time
+
+Scenario: Update risk scoring algorithm with new fraud patterns
+  Given the system uses an initial risk scoring algorithm
+  And new fraud patterns are detected in transaction data
+  When the system updates the algorithm periodically
+  Then the system should recalculate risk scores using the updated algorithm
+  And the recalculated scores should reflect the latest fraud patterns
+
+Scenario: Handle invalid transaction data
+  Given the system is processing a transaction
+  And the transaction data is missing location information
+  When the transaction is processed
+  Then the system should return an error message indicating missing data
+  And the transaction should not be assigned a risk score
+
+---
+
+**Example #3 Input**:
+Description: As a bank, we need a fraud detection risk scoring system to identify and assess the risk associated with customer transactions.
+Acceptance Criteria:
+- The system must calculate a risk score based on predefined rules and transaction data.
+- Risk scores should range from 0 (low risk) to 100 (high risk).
+- The system must generate a real-time risk score for each transaction attempted by a customer.
+- The risk score must be calculated using customer behavior data, transaction history, and external data (e.g., IP address, location, etc.).
+- The risk scoring algorithm must be updated periodically based on emerging fraud patterns.
+
+**Analysis**:
+- This feature is identical to Example #2 in terms of description and acceptance criteria. However, the expected output in the original document focuses on data integration rather than risk scoring directly, suggesting a different intent (e.g., fetching transaction data for scoring).
+- For consistency with the "Fraud Detection & Risk Scoring" use case, I’ll adapt the test cases to focus on data integration as a prerequisite for risk scoring, aligning with the original output.
+
+**Generated Test Cases**:
+Scenario: Fetch real-time transaction data for risk scoring
+  Given the system is integrated with the core banking system
+  And a new transaction is processed
+  When the transaction data is fetched
+  Then the system should retrieve transaction details in real-time including amount, date, and customer data
+  And the data should be available for risk scoring
+
+Scenario: Handle successful data integration
+  Given the system is integrated with the core banking system
+  And transaction data is fetched successfully
+  When the data is processed
+  Then the system should confirm successful retrieval
+  And the transaction data should be visible in the fraud detection dashboard within 1 second
+
+Scenario: Handle data fetch failure
+  Given the system is integrated with the core banking system
+  And a network issue prevents data retrieval
+  When the system attempts to fetch transaction data
+  Then the system should log an error message
+  And the system should retry fetching the data after a 5-second interval
+
+Scenario: Verify data integrity for risk scoring
+  Given the system is integrated with the core banking system
+  And transaction data is fetched
+  When the data is processed
+  Then the system should verify the data is complete and correct
+  And the system should log an error if any data is missing or corrupted
+
+---
+
+**Example #4 Input**:
+Description: As a bank, we need to send real-time alerts when a transaction exceeds a certain risk threshold.
+Acceptance Criteria:
+- The system must trigger an alert when a transaction’s risk score exceeds a predefined threshold.
+- Alerts must be sent to the fraud detection team via email, SMS, or the internal dashboard.
+- The alert must include the transaction details, risk score, and recommended actions (e.g., hold, review, or approve).
+- The system must support customizable thresholds based on transaction type, amount, and customer profile.
+
+**Analysis**:
+- The feature focuses on sending real-time alerts for transactions exceeding risk thresholds, with customizable thresholds and detailed alert content.
+- This aligns with the "Fraud Detection & Risk Scoring" use case, specifically the aspect of evaluating system responses to fraudulent transactions.
+
+**Generated Test Cases**:
+Scenario: Trigger alert for high-risk transaction
+  Given the system has a risk threshold of 70
+  And a transaction has a risk score of 85
+  When the transaction is processed
+  Then the system should trigger a real-time alert
+  And the alert should include transaction details, risk score, and recommended action "review"
+  And the alert should be sent via email and SMS
+
+Scenario: No alert for low-risk transaction
+  Given the system has a risk threshold of 70
+  And a transaction has a risk score of 50
+  When the transaction is processed
+  Then the system should not trigger an alert
+
+Scenario: Custom threshold alert for large withdrawal
+  Given the system has a custom threshold of 60 for withdrawals
+  And a withdrawal transaction has a risk score of 65
+  When the transaction is processed
+  Then the system should trigger an alert
+  And the alert should include transaction details and recommended action "hold"
+
+Scenario: Alert with incomplete data
+  Given the system has a risk threshold of 70
+  And a transaction with missing customer details has a risk score of 75
+  When the transaction is processed
+  Then the system should trigger an alert
+  And the alert should indicate incomplete data as a risk factor
+
+---
+
+**Example #5 Input**:
+Description: As a bank, we need the fraud detection system to identify unusual patterns in transactions that could indicate fraudulent activity.
+Acceptance Criteria:
+- The system must analyze historical data to identify patterns of typical customer behavior.
+- The system should flag transactions that deviate significantly from the customer's normal behavior (e.g., large, frequent transactions).
+- The system must update the fraud detection models automatically as new transaction data is processed.
+- The system must provide a detailed explanation of why a transaction was flagged as suspicious.
+
+**Analysis**:
+- The feature focuses on identifying unusual transaction patterns using historical data, flagging deviations, and updating models automatically, with explanations for flagged transactions.
+- This aligns with the "Fraud Detection & Risk Scoring" use case, emphasizing adaptive threat modeling and evolving fraud patterns.
+
+**Generated Test Cases**:
+Scenario: Flag unusual large transaction
+  Given the system has historical data showing typical transactions of $100-$500
+  And a customer initiates a transaction of $5,000 from an unfamiliar location
+  When the transaction is processed
+  Then the system should flag the transaction as suspicious
+  And the system should explain the flag due to the large amount and unusual location
+
+Scenario: Flag high-frequency transactions
+  Given the system monitors customer transaction frequency
+  And a customer performs 10 transactions within 5 minutes
+  When the transactions are processed
+  Then the system should flag the transactions as suspicious
+  And the system should explain the flag due to high frequency
+
+Scenario: Update fraud model with new data
+  Given the system uses a fraud detection model
+  And new transaction data shows a pattern of frequent small transfers
+  When the system processes the new data
+  Then the system should update the fraud detection model automatically
+  And the updated model should flag similar patterns as suspicious
+
+Scenario: No flag for typical transaction
+  Given the system has historical data showing typical transactions of $100-$500
+  And a customer initiates a transaction of $200 from a usual location
+  When the transaction is processed
+  Then the system should not flag the transaction as suspicious
+
+---
+
+**Example #6 Input**:
+Description: As a bank, we need to implement a machine learning model to improve fraud detection accuracy over time.
+Acceptance Criteria:
+- The system must utilize machine learning algorithms to predict fraud risk based on transaction data.
+- The system should be able to continuously retrain the model based on new labeled transaction data.
+- The system must provide a confidence level for each prediction (e.g., 85% confidence).
+- The machine learning model should support feedback loops where flagged transactions can be reviewed and the model can learn from corrected decisions.
+
+**Analysis**:
+- The feature focuses on using machine learning to predict fraud risk, with continuous retraining, confidence levels, and feedback loops for model improvement.
+- This aligns with the "Fraud Detection & Risk Scoring" use case, particularly the aspect of adaptive threat modeling with AI.
+
+**Generated Test Cases**:
+Scenario: Predict high fraud risk with high confidence
+  Given the system uses a trained machine learning model
+  And a transaction has unusual characteristics
+  When the transaction is processed
+  Then the system should predict a fraud risk score with 90% confidence
+  And the system should flag the transaction as fraudulent
+
+Scenario: Retrain model with feedback
+  Given the system has a machine learning model
+  And a flagged transaction is reviewed and marked as legitimate by an analyst
+  When the feedback is submitted
+  Then the system should retrain the model with the new labeled data
+  And the model should adjust future predictions accordingly
+
+Scenario: Handle low-confidence prediction
+  Given the system uses a machine learning model
+  And a transaction has ambiguous characteristics
+  When the transaction is processed
+  Then the system should predict a fraud risk score with 40% confidence
+  And the system should flag the transaction for manual review
+
+Scenario: Display confidence level
+  Given the system predicts a fraud risk score
+  And a transaction is processed
+  When the prediction is made
+  Then the system should display the confidence level (e.g., 85%) alongside the risk score
