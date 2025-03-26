@@ -7,6 +7,7 @@
 - What It Does
 - How We Built It
 - Challenges We Faced
+- Accomplishments We're Proud Of
 - How to Run
 - Tech Stack
 - Future Roadmap
