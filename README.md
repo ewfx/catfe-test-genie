@@ -76,7 +76,7 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
    ```
 5. Enable Vertex AI API
    Before proceeding, ensure the Vertex AI API is enabled in your Google Cloud project.
-   - Go to https://console.cloud.google.com/apis/library/vertexai.googleapis.com
+   - Go to https://console.cloud.google.com/apis/library/aiplatform.googleapis.com
    - Select your project and click 'Enable' if not already enabled.
 6. Launch the App
    **Windows (PowerShell)**: `python .\code\src\app.py`
