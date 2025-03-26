@@ -79,8 +79,8 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
    - Go to https://console.cloud.google.com/apis/library/vertexai.googleapis.com
    - Select your project and click 'Enable' if not already enabled.
 6. Launch the App
-**Windows (PowerShell)**: `python .\code\src\app.py`
-**macOS/Linux**: `python ./code/src/app.py`
+   **Windows (PowerShell)**: `python .\code\src\app.py`
+   **macOS/Linux**: `python ./code/src/app.py`
    - Visit http://localhost:5000 in your browser. There will be a external URL mentioned in Flask log as well which can be used.
    - Enter Jira details (Title, ID, Description, Acceptance Criteria), click "Generate," and download the .feature file.
 
