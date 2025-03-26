@@ -57,14 +57,14 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
 2. Change directory to git project folder `cd catfe-test-genie`
 3. Install dependencies  
    Run the appropriate setup script based on your operating system:
-  **Windows (PowerShell)**:
-  ```powershell
-  .\code\src\setup.ps1
-  ```
-  **macOS/Linux**:
-  ```sh
-  bash code/src/setup.sh
-  ```
+  - **Windows (PowerShell)**:
+    ```powershell
+    .\code\src\setup.ps1
+    ```
+  - **macOS/Linux**:
+    ```sh
+    bash code/src/setup.sh
+    ```
    - Sets up a virtual environment, installs dependencies, and authenticates with Google Cloud.
    - Follow the browser prompt to log in with your Google account.
 4. Configure
@@ -78,8 +78,8 @@ We tapped into Google Cloud Platform’s AI prowess, leveraging their $300 free 
    - Go to https://console.cloud.google.com/apis/library/aiplatform.googleapis.com
    - Select your project and click 'Enable' if not already enabled.
 6. Launch the App
-   **Windows (PowerShell)**: `python .\code\src\app.py`
-   **macOS/Linux**: `python ./code/src/app.py`
+   - **Windows (PowerShell)**: `python .\code\src\app.py`
+   - **macOS/Linux**: `python ./code/src/app.py`
    - Visit http://localhost:5000 in your browser. There will be a external URL mentioned in Flask log as well which can be used.
    - Enter Jira details (Title, ID, Description, Acceptance Criteria), click "Generate," and download the .feature file.
 
